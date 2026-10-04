@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madinah Arabic Book 1 Vocabulary Builder</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#eef4ff,#f8fbff);
+  color:#17213a;
+}
+
+.app{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+header{
+  background:white;
+  border-radius:24px;
+  padding:24px 18px;
+  text-align:center;
+  box-shadow:0 8px 30px rgba(30,50,90,.08);
+  margin-bottom:18px
+}
+
+header h1{
+  margin:0;
+  font-size:clamp(28px,5vw,46px)
+}
+
+header p{
+  margin:10px 0 0;
+  color:#68738b;
+  font-size:18px
+}
+
+.tabs,.level-tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:16px 0
+}
+
+button{
+  border:0;
+  border-radius:14px;
+  padding:13px 18px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  background:#274487;
+  color:white;
+  transition:.15s
+}
+
+button:hover{
+  transform:translateY(-1px);
+  opacity:.94
+}
+
+button.secondary{
+  background:white;
+  color:#274487;
+  border:1px solid #d9e0ec
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+  transform:none
+}
+
+.panel{
+  background:white;
+  border-radius:24px;
+  padding:22px;
+  box-shadow:0 8px 30px rgba(30,50,90,.08);
+  margin-bottom:18px
+}
+
+.hidden{
+  display:none!important
+}
+
+.level-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px
+}
+
+.level-card{
+  border:1px solid #e0e6f0;
+  border-radius:18px;
+  padding:18px;
+  background:#fbfcff
+}
+
+.level-card h3{
+  margin:0 0 8px
+}
+
+.lesson-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:12px
+}
+
+.lesson-card{
+  border:1px solid #dfe5ef;
+  border-radius:16px;
+  padding:16px;
+  background:white;
+  cursor:pointer
+}
+
+.lesson-card:hover{
+  border-color:#274487;
+  background:#f6f8ff
+}
+
+.lesson-card .count{
+  color:#6c7890;
+  font-size:14px;
+  margin-top:5px
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#edf2ff;
+  color:#274487;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:8px
+}
+
+.learn-card{
+  text-align:center;
+  min-height:420px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center
+}
+
+.visual{
+  font-size:78px;
+  line-height:1;
+  margin:10px 0 18px
+}
+
+.arabic{
+  direction:rtl;
+  font-family:"Noto Naskh Arabic","Amiri",serif;
+  font-size:clamp(46px,9vw,82px);
+  line-height:1.25;
+  margin:12px 0
+}
+
+.meaning{
+  font-size:clamp(24px,5vw,38px);
+  font-weight:700;
+  margin:10px 0
+}
+
+.learn-actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:22px
+}
+
+.quiz-intro{
+  background:#fff8dd;
+  border-radius:16px;
+  padding:15px;
+  color:#7b6414
+}
+
+.quiz-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  color:#657188
+}
+
+.progress{
+  height:10px;
+  background:#e8edf5;
+  border-radius:999px;
+  overflow:hidden;
+  margin:15px 0
+}
+
+.progress > div{
+  height:100%;
+  background:#274487;
+  width:0%;
+  transition:.2s
+}
+
+.question{
+  font-size:clamp(22px,4vw,31px);
+  font-weight:700;
+  text-align:center;
+  margin:28px 0
+}
+
+.question-arabic{
+  direction:rtl;
+  font-family:"Noto Naskh Arabic","Amiri",serif;
+  font-size:clamp(40px,8vw,64px);
+  text-align:center;
+  margin:22px 0
+}
+
+.options{
+  display:grid;
+  gap:12px
+}
+
+.option{
+  background:white;
+  color:#17213a;
+  border:2px solid #dce3ee;
+  border-radius:16px;
+  padding:18px;
+  font-size:20px;
+  min-height:62px;
+  width:100%
+}
+
+.option:hover{
+  border-color:#274487;
+  background:#f7f9ff
+}
+
+.option.correct{
+  border-color:#218c58;
+  background:#eaf8f0;
+  color:#12633d
+}
+
+.option.wrong{
+  border-color:#c43d4d;
+  background:#fff0f2;
+  color:#8e2432
+}
+
+.feedback{
+  margin-top:18px;
+  padding:16px;
+  border-radius:15px;
+  font-size:19px;
+  font-weight:700
+}
+
+.feedback.correct{
+  background:#eaf8f0;
+  color:#12633d
+}
+
+.feedback.wrong{
+  background:#fff0f2;
+  color:#8e2432
+}
+
+.next-row{
+  display:flex;
+  justify-content:center;
+  margin-top:18px
+}
+
+.score-final{
+  text-align:center;
+  padding:28px
+}
+
+.score-number{
+  font-size:64px;
+  font-weight:800;
+  color:#274487
+}
+
+.small{
+  font-size:14px;
+  color:#69758b
+}
+
+.loading{
+  text-align:center;
+  padding:30px;
+  color:#657188
+}
+
+@media(max-width:600px){
+  .app{
+    padding:10px
+  }
+
+  .panel{
+    padding:16px;
+    border-radius:18px
+  }
+
+  header{
+    padding:20px 12px;
+    border-radius:18px
+  }
+
+  button{
+    width:auto
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <h1>📚 Madinah Arabic Book 1<br>Vocabulary Builder</h1>
+  <p>Learn • Practise • Review — Lessons 1–23</p>
+</header>
+
+<div class="tabs">
+  <button onclick="showHome()">Levels</button>
+  <button class="secondary" onclick="showLearn()">📖 Learn</button>
+  <button class="secondary" onclick="showQuizHome()">🎯 Quiz</button>
+</div>
+
+<section id="homeView" class="panel">
+
+  <h2>Choose a Level</h2>
+
+  <p class="small">
+    Level 1–8 • Level 8 = Lessons 21–23
+  </p>
+
+  <div id="levelGrid" class="level-grid"></div>
+
+</section>
+
+
+<section id="lessonView" class="panel hidden">
+
+  <button class="secondary" onclick="showHome()">
+    ← Back to Levels
+  </button>
+
+  <h2 id="levelTitle"></h2>
+
+  <div id="lessonGrid" class="lesson-grid"></div>
+
+</section>
+
+
+<section id="learnView" class="panel hidden">
+
+  <div class="quiz-head">
+
+    <div>
+      <b id="learnLessonTitle">
+        Vocabulary Practice
+      </b>
+    </div>
+
+    <div id="learnCount">
+      Word 1 of 1
+    </div>
+
+  </div>
+
+  <div class="learn-card">
+
+    <div id="learnVisual" class="visual hidden"></div>
+
+    <div id="learnArabic" class="arabic"></div>
+
+    <div id="learnMeaning" class="meaning"></div>
+
+    <div class="small" id="learnEnglish"></div>
+
+    <div class="learn-actions">
+
+      <button
+        class="secondary"
+        id="prevWord"
+        onclick="prevWord()">
+        ← Previous
+      </button>
+
+      <button onclick="speakCurrent()">
+        🔊 Listen
+      </button>
+
+      <button onclick="nextWord()">
+        Next →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="quizHomeView" class="panel hidden">
+
+  <h2>🎯 Vocabulary Quiz</h2>
+
+  <div class="quiz-intro">
+
+    Each lesson has its own quiz.
+
+    <b>4 options</b> are shown for every question.
+
+    <b>Each question = 1 point.</b>
+
+    You will see immediate feedback and a
+    <b>Next Question</b> button.
+
+  </div>
+
+  <h3>Select a lesson</h3>
+
+  <div id="quizLessonGrid" class="lesson-grid"></div>
+
+</section>
+
+
+<section id="quizView" class="panel hidden">
+
+  <div class="quiz-head">
+
+    <div id="quizLessonTitle"></div>
+
+    <div id="quizScore">
+      Score: 0
+    </div>
+
+  </div>
+
+  <div class="progress">
+    <div id="quizProgressBar"></div>
+  </div>
+
+  <div id="quizArea"></div>
+
+</section>
+
+
+<div id="loading" class="panel loading">
+  Loading vocabulary…
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   EXTERNAL VOCABULARY SOURCE
+   Lessons 1–20
+   ========================================================= */
+
+const EXTERNAL_DATA_URL =
+"https://raw.githubusercontent.com/khDev01/lessons/main/MedinaArabic/book1vocabOnly.json";
+
+
+/* =========================================================
+   CUSTOM VOCABULARY
+   Lessons 18–23
+   These are based on the vocabulary pages supplied.
+   ========================================================= */
+
+const customLessons = {
+
+18: [
+
+["Eid ul Fitr","عِيدُ الْفِطْرِ"],
+["Eid ul Adha","عِيدُ الْأَضْحَى"],
+["This is (dual, m)","هَذَانِ"],
+["This is (dual, f)","هَاتَانِ"],
+["They (dual, m/f)","هُمَا"],
+["How many / much","كَمْ"],
+["2 brothers","أَخَوَانِ"],
+["Riyal","رِيَال"],
+["Business","مَتْجَر"],
+["Rakah","رَكْعَة"],
+["Rakahs","رَكَعَات"],
+["Wheel","عَجَلَة"],
+["Festival / Celebration","عِيد"],
+["Year","سَنَة"],
+["Window","نَافِذَة"],
+["Ruler","مِسْطَرَة"],
+["Area","حَيّ"],
+["Areas","أَحْيَاء"],
+["Wheels","عَجَلَات"],
+["Riyals","رِيَالَات"],
+["Rulers","مَسَاطِر"]
+
+],
+
+19: [
+
+["Passenger","رَاكِب"],
+["Passengers","رُكَّاب"],
+["Old (pl./m/f)","قُدَامَى"],
+["Pocket","جَيْب"],
+["All","كُلّ"],
+["All of them (pl.m)","كُلُّهُمْ"],
+["All of you (pl.m)","كُلُّكُمْ"],
+["All of us","كُلُّنَا"],
+["Different","مُخْتَلِف"],
+["Bus","حَافِلَة"],
+["From them","مِنْهُمْ"],
+["Europe","أُورُوبَا"],
+["Yugoslavia","يُوغُسْلَافِيَا"],
+["Question","سُؤَال"],
+["Questions","أَسْئِلَة"],
+["Buses","حَافِلَات"],
+["Pockets","جُيُوب"],
+["Ten (f)","عَشَرَة"],
+["Three (f)","ثَلَاثَة"],
+["Four (f)","أَرْبَعَة"],
+["One (m)","وَاحِد"],
+["Seven (f)","سَبْعَة"],
+["Five (m)","خَمْسَة"],
+["Eight (f)","ثَمَانِيَة"],
+["Six (f)","سِتَّة"],
+["Nine (f)","تِسْعَة"],
+["Two (m)","إِثْنَانِ"],
+["Thanks","شُكْرًا"],
+["Days","أَيَّام"],
+["Price","ثَمَن"],
+["Half","نِصْف"],
+["1/10 of a riyal","قِرْش"],
+["1/10 of riyals","قُرُوش"]
+
+],
+
+20: [
+
+["Three daughters","ثَلَاثُ بَنَات"],
+["Four sisters","أَرْبَعُ أَخَوَات"],
+["Five mothers","خَمْسُ أُمَّهَات"],
+["Six women","سِتُّ نِسَاء"],
+["Seven students (f)","سَبْعُ طَالِبَات"],
+["Eight rooms","ثَمَانِي غُرَف"],
+["Ten (f)","عَشْرَة"],
+["Two (f)","اثْنَتَانِ"],
+["One (f)","وَاحِدَة"],
+["Chicken","دَجَاجَة"],
+["Chickens","دَجَاجَات"],
+["Faculties","كُلِّيَات"],
+["Paternal aunts","عَمَّات"],
+["Universities","جَامِعَات"],
+["Rooms","غُرَف"],
+["Salma","سَلْمَى"],
+["Three sons","ثَلَاثَةُ أَبْنَاء"],
+["Four brothers","أَرْبَعَةُ إِخْوَة"],
+["Five fathers","خَمْسَةُ آبَاء"],
+["Six men","سِتَّةُ رِجَال"],
+["Seven students (m)","سَبْعَةُ طُلَّاب"],
+["Eight houses","ثَمَانِيَةُ بُيُوت"],
+["Ten (m)","عَشَر"],
+["Two (m)","إِثْنَانِ"],
+["One (m)","وَاحِد"],
+["Word","كَلِمَة"],
+["Words","كَلِمَات"],
+["Magazine / Journal","مَجَلَّة"],
+["Magazines / Journals","مَجَلَّات"],
+["Letter (of the alphabet)","حَرْف"],
+["Letters (of the alphabet)","حُرُوف"]
+
+],
+
+21: [
+
+["Very much / many","كَثِيرًا"],
+["Or (used for questioning)","أَمْ"],
+["Closed","مُغْلَقَة"],
+["Africa","إِفْرِيقِيَا"],
+["Desks","مَكَاتِب"],
+["Chairs","كَرَاسِي"],
+["Direction of prayer","قِبْلَة"],
+["That","ذَاكَ"],
+["Greece","الْيُونَان"],
+["Colour","لَوْن"],
+["Colours","أَلْوَان"],
+["We love","نُحِبُّ"],
+["We love him","نُحِبُّهُ"],
+["Asia","آسِيَا"],
+["Spacious","وَاسِع"],
+["Near","قَرِيبَة"],
+["Classroom","فَصْل"],
+["Classrooms","فُصُول"],
+["Two windows","نَافِذَتَان"],
+["Ahmad","أَحْمَد"],
+["Ghana","غَانَا"],
+["Nigeria","نِيجِيرِيَا"],
+["Bayrum","بَيْرَم"],
+["Abu Bakr","أَبُو بَكْر"],
+["But","وَلَكِنْ"],
+["Yusuf","يُوسُف"],
+["Righteous","صَالِح"]
+
+],
+
+22: [
+
+["Tea cup","فُنْجَان"],
+["Tea cups","فَنَاجِين"],
+["Minute","دَقِيقَة"],
+["Minutes","دَقَائِق"],
+["Key","مِفْتَاح"],
+["Keys","مَفَاتِيح"],
+["She said","قَالَتْ"],
+["Red","أَحْمَر"],
+["Blue","أَزْرَق"],
+["Green","أَخْضَر"],
+["Black","أَسْوَد"],
+["Yellow","أَصْفَر"],
+["White","أَبْيَض"],
+["He said","قَالَ"],
+["Makkah","مَكَّة"],
+["Uthmaan","عُثْمَان"],
+["Two students","طَالِبَان"],
+["Many","كَثِيرَة"],
+["Few","قَلِيلَة"],
+["Affaan","عَفَّان"],
+["Sufyaan","سُفْيَان"],
+["Marwaan","مَرْوَان"],
+["Nu'maan","نُعْمَان"],
+["Full / satisfied","شَبْعَان"],
+["Anwar","أَنْوَر"],
+["Akbar","أَكْبَر"],
+["Mosques","مَسَاجِد"],
+["Schools","مَدَارِس"],
+["Baghdad","بَغْدَاد"],
+["Jeddah","جِدَّة"]
+
+],
+
+23: [
+
+["Ka'bah","كَعْبَة"],
+["Lewis","لُوِيس"],
+["Washington","وَاشِنْطُن"],
+["Bring (command)","هَاتِ"]
+
+]
+
+};
+
+
+/* =========================================================
+   VISUALS
+   Pictures are shown only when appropriate.
+   ========================================================= */
+
+const emojiMap = {
+
+"house":"🏠",
+"boy":"👦",
+"mosque":"🕌",
+"student":"👨‍🎓",
+"door":"🚪",
+"man":"👨",
+"book":"📖",
+"pen":"🖊️",
+"dog":"🐕",
+"cat":"🐈",
+"desk":"🪑",
+"bed":"🛏️",
+"horse":"🐎",
+"camel":"🐪",
+"rooster":"🐓",
+"shirt":"👕",
+"star":"⭐",
+"key":"🔑",
+"chicken":"🐔",
+"chickens":"🐔",
+"window":"🪟",
+"windows":"🪟",
+"classroom":"🏫",
+"classrooms":"🏫",
+"chair":"🪑",
+"chairs":"🪑",
+"tea cup":"☕",
+"tea cups":"☕",
+"red":"🔴",
+"blue":"🔵",
+"green":"🟢",
+"black":"⚫",
+"yellow":"🟡",
+"white":"⚪",
+"wheel":"🛞",
+"wheels":"🛞",
+"mosques":"🕌",
+"schools":"🏫",
+"Ka'bah":"🕋",
+"Eid ul Fitr":"🌙",
+"Eid ul Adha":"🐑",
+"Makkah":"🕋",
+"Jeddah":"🌊",
+"Africa":"🌍",
+"Asia":"🌏",
+"Europe":"🌍",
+"Nigeria":"🇳🇬",
+"Ghana":"🇬🇭",
+"Greece":"🇬🇷",
+"Washington":"🇺🇸"
+
+};
+
+
+/* =========================================================
+   APPLICATION STATE
+   ========================================================= */
+
+let lessons={};
+
+let currentLevel=null;
+let currentLesson=null;
+let currentWordIndex=0;
+
+let quizQuestions=[];
+let quizIndex=0;
+let quizScore=0;
+let answered=false;
+
+
+/* =========================================================
+   LEVEL STRUCTURE
+   ========================================================= */
+
+const levels={
+
+1:[1,2],
+
+2:[3,4,5],
+
+3:[6,7,8],
+
+4:[9,10,11],
+
+5:[12,13,14],
+
+6:[15,16,17],
+
+7:[18,19,20],
+
+8:[21,22,23]
+
+};
+
+
+/* =========================================================
+   NORMALIZE VOCABULARY
+   ========================================================= */
+
+function normalizePairs(arr){
+
+  return (arr||[]).map((x,i)=>({
+
+    id:i,
+
+    en:String(x[0]).trim(),
+
+    ar:String(x[1]).trim(),
+
+    visual:emojiMap[String(x[0]).trim()] || ""
+
+  }));
+
+}
+
+
+/* =========================================================
+   ADD CUSTOM LESSONS
+   ========================================================= */
+
+function addCustom(){
+
+  Object.keys(customLessons).forEach(n=>{
+
+    lessons[n]=normalizePairs(customLessons[n]);
+
+  });
+
+}
+
+
+/* =========================================================
+   LOAD LESSONS 1–20
+   ========================================================= */
+
+async function loadData(){
+
+  addCustom();
+
+  try{
+
+    const r=await fetch(
+      EXTERNAL_DATA_URL,
+      {cache:"no-store"}
+    );
+
+    if(!r.ok){
+      throw new Error("Vocabulary source unavailable");
+    }
+
+    const data=await r.json();
+
+    const grouped={};
+
+    data.forEach(x=>{
+
+      const l=Number(x.L);
+
+      if(l>=1 && l<=20){
+
+        if(!grouped[l]){
+          grouped[l]=[];
+        }
+
+        grouped[l].push({
+
+          id:x.id,
+
+          en:String(x.En||"").trim(),
+
+          ar:String(x.Ar||"").trim(),
+
+          visual:
+            emojiMap[String(x.En||"").trim()] || ""
+
+        });
+
+      }
+
+    });
+
+    Object.keys(grouped).forEach(l=>{
+
+      lessons[l]=grouped[l];
+
+    });
+
+    /*
+      Re-add custom Lessons 18–23.
+      This guarantees that the vocabulary supplied
+      for this project remains exactly as entered.
+    */
+
+    addCustom();
+
+  }
+
+  catch(e){
+
+    console.warn(e);
+
+  }
+
+  document
+    .getElementById("loading")
+    .classList
+    .add("hidden");
+
+  renderLevels();
+
+  renderQuizLessons();
+
+}
+
+
+/* =========================================================
+   VIEW CONTROL
+   ========================================================= */
+
+function showOnly(id){
+
+  [
+    "homeView",
+    "lessonView",
+    "learnView",
+    "quizHomeView",
+    "quizView"
+  ].forEach(x=>{
+
+    document
+      .getElementById(x)
+      .classList
+      .toggle("hidden",x!==id);
+
+  });
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   HOME
+   ========================================================= */
+
+function showHome(){
+
+  showOnly("homeView");
+
+  renderLevels();
+
+}
+
+
+/* =========================================================
+   QUIZ HOME
+   ========================================================= */
+
+function showQuizHome(){
+
+  showOnly("quizHomeView");
+
+  renderQuizLessons();
+
+}
+
+
+/* =========================================================
+   LEARN
+   ========================================================= */
+
+function showLearn(){
+
+  if(!currentLesson){
+
+    showQuizHome();
+
+    return;
+
+  }
+
+  showOnly("learnView");
+
+  renderLearn();
+
+}
+
+
+/* =========================================================
+   RENDER LEVELS
+   ========================================================= */
+
+function renderLevels(){
+
+  const grid=
+    document.getElementById("levelGrid");
+
+  grid.innerHTML="";
+
+  Object.keys(levels).forEach(l=>{
+
+    const nums=levels[l];
+
+    const card=
+      document.createElement("div");
+
+    card.className="level-card";
+
+    card.innerHTML=`
+
+      <span class="badge">
+        Level ${l}
+      </span>
+
+      <h3>
+        Lessons ${nums[0]}–${nums[nums.length-1]}
+      </h3>
+
+      <p>
+        ${nums.length}
+        lesson${nums.length>1?"s":""}
+      </p>
+
+      <button
+        onclick="openLevel(${l})">
+        Open Level ${l}
+      </button>
+
+    `;
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+
+/* =========================================================
+   OPEN LEVEL
+   ========================================================= */
+
+function openLevel(l){
+
+  currentLevel=l;
+
+  document
+    .getElementById("levelTitle")
+    .textContent=
+      `Level ${l} — Lessons ${levels[l][0]}–${levels[l][levels[l].length-1]}`;
+
+  const grid=
+    document.getElementById("lessonGrid");
+
+  grid.innerHTML="";
+
+  levels[l].forEach(n=>{
+
+    const words=
+      lessons[n] || [];
+
+    const card=
+      document.createElement("div");
+
+    card.className="lesson-card";
+
+    card.onclick=
+      ()=>openLesson(n);
+
+    card.innerHTML=`
+
+      <span class="badge">
+        Lesson ${n}
+      </span>
+
+      <h3>
+        Lesson ${n} Vocabulary
+      </h3>
+
+      <div class="count">
+        ${words.length} vocabulary items
+      </div>
+
+      ${
+        words.length
+        ?
+        `<button style="margin-top:12px">
+           Learn
+         </button>`
+        :
+        `<div class="small"
+              style="margin-top:12px">
+           Vocabulary not available
+         </div>`
+      }
+
+    `;
+
+    grid.appendChild(card);
+
+  });
+
+  showOnly("lessonView");
+
+}
+
+
+/* =========================================================
+   OPEN LESSON
+   ========================================================= */
+
+function openLesson(n){
+
+  currentLesson=n;
+
+  currentWordIndex=0;
+
+  if(!(lessons[n]||[]).length){
+
+    alert(
+      `Lesson ${n} does not have vocabulary loaded yet.`
+    );
+
+    return;
+
+  }
+
+  showOnly("learnView");
+
+  renderLearn();
+
+}
+
+
+/* =========================================================
+   LEARN MODE
+   ========================================================= */
+
+function renderLearn(){
+
+  const words=
+    lessons[currentLesson] || [];
+
+  const w=
+    words[currentWordIndex];
+
+  if(!w){
+    return;
+  }
+
+  document
+    .getElementById("learnLessonTitle")
+    .textContent=
+      `Lesson ${currentLesson} Vocabulary`;
+
+  document
+    .getElementById("learnCount")
+    .textContent=
+      `Word ${currentWordIndex+1} of ${words.length}`;
+
+  document
+    .getElementById("learnArabic")
+    .textContent=
+      w.ar;
+
+  document
+    .getElementById("learnMeaning")
+    .textContent=
+      w.en;
+
+  document
+    .getElementById("learnEnglish")
+    .textContent="";
+
+  const v=
+    document.getElementById("learnVisual");
+
+  if(w.visual){
+
+    v.textContent=w.visual;
+
+    v.classList.remove("hidden");
+
+  }
+
+  else{
+
+    v.textContent="";
+
+    v.classList.add("hidden");
+
+  }
+
+  document
+    .getElementById("prevWord")
+    .disabled=
+      currentWordIndex===0;
+
+}
+
+
+/* =========================================================
+   PREVIOUS WORD
+   ========================================================= */
+
+function prevWord(){
+
+  if(currentWordIndex>0){
+
+    currentWordIndex--;
+
+    renderLearn();
+
+  }
+
+}
+
+
+/* =========================================================
+   NEXT WORD
+   ========================================================= */
+
+function nextWord(){
+
+  const words=
+    lessons[currentLesson] || [];
+
+  if(
+    currentWordIndex<
+    words.length-1
+  ){
+
+    currentWordIndex++;
+
+    renderLearn();
+
+  }
+
+  else{
+
+    alert(
+      "You have reached the end of this lesson."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ARABIC AUDIO
+   ========================================================= */
+
+function speakCurrent(){
+
+  const w=
+    (lessons[currentLesson]||[])
+    [currentWordIndex];
+
+  if(!w){
+    return;
+  }
+
+  if("speechSynthesis" in window){
+
+    const u=
+      new SpeechSynthesisUtterance(w.ar);
+
+    u.lang="ar-SA";
+
+    u.rate=.78;
+
+    speechSynthesis.cancel();
+
+    speechSynthesis.speak(u);
+
+  }
+
+  else{
+
+    alert(
+      "Audio is not supported by this browser."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   QUIZ LESSON SELECTION
+   ========================================================= */
+
+function renderQuizLessons(){
+
+  const grid=
+    document.getElementById(
+      "quizLessonGrid"
+    );
+
+  grid.innerHTML="";
+
+  for(let n=1;n<=23;n++){
+
+    const words=
+      lessons[n] || [];
+
+    const card=
+      document.createElement("div");
+
+    card.className="lesson-card";
+
+    card.innerHTML=`
+
+      <span class="badge">
+        Lesson ${n}
+      </span>
+
+      <h3>
+        Lesson ${n} Quiz
+      </h3>
+
+      <div class="count">
+        ${words.length} vocabulary items
+      </div>
+
+      ${
+        words.length
+        ?
+        `<button
+           style="margin-top:12px"
+           onclick="
+             event.stopPropagation();
+             startQuiz(${n})
+           ">
+           Start Quiz
+         </button>`
+        :
+        `<div
+           class="small"
+           style="margin-top:12px">
+           Not loaded
+         </div>`
+      }
+
+    `;
+
+    if(words.length){
+
+      card.onclick=
+        ()=>startQuiz(n);
+
+    }
+
+    grid.appendChild(card);
+
+  }
+
+}
+
+
+/* =========================================================
+   SHUFFLE
+   ========================================================= */
+
+function shuffle(a){
+
+  const x=[...a];
+
+  for(
+    let i=x.length-1;
+    i>0;
+    i--
+  ){
+
+    const j=
+      Math.floor(
+        Math.random()*(i+1)
+      );
+
+    [x[i],x[j]]=
+      [x[j],x[i]];
+
+  }
+
+  return x;
+
+}
+
+
+/* =========================================================
+   BUILD 10 QUESTION QUIZ
+   ========================================================= */
+
+function buildQuiz(n){
+
+  const words=
+    lessons[n] || [];
+
+  if(!words.length){
+    return [];
+  }
+
+  const picked=[];
+
+  const shuffled=
+    shuffle(words);
+
+  /*
+    Always create exactly 10 questions.
+    If a lesson has fewer than 10 words,
+    words are reused.
+  */
+
+  for(let i=0;i<10;i++){
+
+    picked.push(
+      shuffled[i%shuffled.length]
+    );
+
+  }
+
+  return picked.map(
+    (correct,i)=>{
+
+      /*
+        Alternate question type:
+        English → Arabic
+        Arabic → English
+      */
+
+      const askArabic=
+        i%2===1;
+
+      const pool=
+        shuffle(
+          words.filter(
+            x=>x!==correct
+          )
+        );
+
+      const distractors=
+        pool.slice(0,3);
+
+      while(
+        distractors.length<3
+      ){
+
+        distractors.push(
+          words[
+            (
+              distractors.length+i+1
+            )%words.length
+          ]
+        );
+
+      }
+
+      const options=
+        shuffle([
+          correct,
+          ...distractors
+        ]);
+
+      return{
+        correct,
+        askArabic,
+        options
+      };
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   START QUIZ
+   ========================================================= */
+
+function startQuiz(n){
+
+  currentLesson=n;
+
+  quizQuestions=
+    buildQuiz(n);
+
+  quizIndex=0;
+
+  quizScore=0;
+
+  answered=false;
+
+  showOnly("quizView");
+
+  renderQuestion();
+
+}
+
+
+/* =========================================================
+   RENDER QUESTION
+   ========================================================= */
+
+function renderQuestion(){
+
+  const q=
+    quizQuestions[quizIndex];
+
+  if(!q){
+
+    showQuizResult();
+
+    return;
+
+  }
+
+  answered=false;
+
+  document
+    .getElementById("quizLessonTitle")
+    .textContent=
+      `Lesson ${currentLesson} Quiz`;
+
+  document
+    .getElementById("quizScore")
+    .textContent=
+      `Score: ${quizScore}`;
+
+  document
+    .getElementById("quizProgressBar")
+    .style
+    .width=
+      ((quizIndex)/10*100)+"%";
+
+  const area=
+    document.getElementById(
+      "quizArea"
+    );
+
+  const visual=
+    q.correct.visual;
+
+  const prompt=
+    q.askArabic
+    ?
+    "Choose the English meaning of:"
+    :
+    "Choose the Arabic word for:";
+
+  area.innerHTML=`
+
+    <div
+      class="small"
+      style="text-align:center">
+
+      Question
+      ${quizIndex+1}
+      of 10
+
+    </div>
+
+    ${
+      visual
+      ?
+      `<div
+         class="visual"
+         style="text-align:center">
+         ${visual}
+       </div>`
+      :
+      ""
+    }
+
+    <div class="question">
+      ${prompt}
+    </div>
+
+    ${
+      q.askArabic
+
+      ?
+
+      `<div class="question-arabic">
+         ${q.correct.ar}
+       </div>`
+
+      :
+
+      `<div
+         class="question"
+         style="margin-top:0">
+         ${q.correct.en}
+       </div>`
+
+    }
+
+    <div class="options">
+
+      ${
+        q.options.map(
+          (o,i)=>`
+
+          <button
+            class="option"
+            id="opt${i}"
+            onclick="answerQuestion(${i})">
+
+            ${
+              q.askArabic
+              ? o.en
+              : o.ar
+            }
+
+          </button>
+
+        `
+        ).join("")
+      }
+
+    </div>
+
+    <div id="feedback"></div>
+
+    <div
+      class="next-row"
+      id="nextRow">
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   ANSWER QUESTION
+   ========================================================= */
+
+function answerQuestion(index){
+
+  /*
+    Prevent changing the answer after
+    the learner has selected an option.
+  */
+
+  if(answered){
+    return;
+  }
+
+  answered=true;
+
+  const q=
+    quizQuestions[quizIndex];
+
+  const selected=
+    q.options[index];
+
+  const correct=
+    selected===q.correct;
+
+  if(correct){
+
+    quizScore++;
+
+  }
+
+  /*
+    Disable all four options.
+  */
+
+  document
+    .querySelectorAll(".option")
+    .forEach((b,i)=>{
+
+      b.disabled=true;
+
+      /*
+        Always highlight correct answer.
+      */
+
+      if(
+        q.options[i]===q.correct
+      ){
+
+        b.classList.add(
+          "correct"
+        );
+
+      }
+
+      /*
+        Highlight selected wrong answer.
+      */
+
+      else if(i===index){
+
+        b.classList.add(
+          "wrong"
+        );
+
+      }
+
+    });
+
+
+  /*
+    Display Correct / Incorrect response.
+  */
+
+  const fb=
+    document.getElementById(
+      "feedback"
+    );
+
+  fb.className=
+    `feedback ${
+      correct
+      ? "correct"
+      : "wrong"
+    }`;
+
+  fb.innerHTML=
+
+    correct
+
+    ?
+
+    `✅ Correct! +1 point`
+
+    :
+
+    `❌ Incorrect.
+     Correct answer:
+     <b>${
+       q.askArabic
+       ? q.correct.en
+       : q.correct.ar
+     }</b>`;
+
+
+  /*
+    Update score immediately.
+  */
+
+  document
+    .getElementById("quizScore")
+    .textContent=
+      `Score: ${quizScore}`;
+
+
+  /*
+    IMPORTANT:
+    Next Question button appears
+    only AFTER an answer is selected.
+  */
+
+  const next=
+    document.getElementById(
+      "nextRow"
+    );
+
+  next.innerHTML=`
+
+    <button
+      onclick="nextQuestion()">
+
+      ${
+        quizIndex===9
+        ?
+        "🏁 Finish Quiz"
+        :
+        "Next Question →"
+      }
+
+    </button>
+
+  `;
+
+}
+
+
+/* =========================================================
+   NEXT QUESTION
+   ========================================================= */
+
+function nextQuestion(){
+
+  quizIndex++;
+
+  if(quizIndex>=10){
+
+    showQuizResult();
+
+  }
+
+  else{
+
+    renderQuestion();
+
+  }
+
+}
+
+
+/* =========================================================
+   FINAL SCORE
+   ========================================================= */
+
+function showQuizResult(){
+
+  document
+    .getElementById(
+      "quizProgressBar"
+    )
+    .style
+    .width="100%";
+
+  const pct=
+    quizScore*10;
+
+  document
+    .getElementById("quizArea")
+    .innerHTML=`
+
+      <div class="score-final">
+
+        <div class="badge">
+          Lesson ${currentLesson} Complete
+        </div>
+
+        <h2>
+          🎉 Quiz Finished!
+        </h2>
+
+        <div class="score-number">
+          ${quizScore} / 10
+        </div>
+
+        <h3>
+          ${pct}%
+        </h3>
+
+        <p>
+          Each question was worth
+          <b>1 point</b>.
+        </p>
+
+        <div class="learn-actions">
+
+          <button
+            onclick="startQuiz(${currentLesson})">
+
+            🔄 Try Again
+
+          </button>
+
+          <button
+            class="secondary"
+            onclick="showQuizHome()">
+
+            Choose Another Lesson
+
+          </button>
+
+          <button
+            class="secondary"
+            onclick="openLesson(${currentLesson})">
+
+            📖 Review Lesson
+
+          </button>
+
+        </div>
+
+      </div>
+
+  `;
+
+  document
+    .getElementById("quizScore")
+    .textContent=
+      `Final Score: ${quizScore}/10`;
+
+}
+
+
+/* =========================================================
+   START APPLICATION
+   ========================================================= */
+
+loadData();
+
+</script>
+
+</body>
+</html>
